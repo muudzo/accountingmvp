@@ -1,4 +1,6 @@
+"""Input sanitization utilities for security."""
 import re
+
 
 def sanitize_csv_value(value: str) -> str:
     """
@@ -19,6 +21,37 @@ def sanitize_csv_value(value: str) -> str:
     
     return clean_value
 
+
 def safe_filename(filename: str) -> str:
-    """Removes path traversal characters."""
-    return re.sub(r'[^a-zA-Z0-9_.-]', '_', filename)
+    """
+    Removes path traversal and other dangerous characters from filenames.
+    
+    Security considerations:
+    - Remove ../ path traversal attempts
+    - Remove absolute path prefixes
+    - Replace special characters with underscores
+    - Collapse multiple underscores
+    """
+    # First, remove any path traversal sequences
+    clean = filename
+    
+    # Remove ../ and ..\\ sequences
+    clean = re.sub(r'\.\.[\\/]', '', clean)
+    
+    # Remove leading slashes (absolute paths)
+    clean = re.sub(r'^[\\/]+', '', clean)
+    
+    # Replace remaining special characters with underscores
+    clean = re.sub(r'[^a-zA-Z0-9_.-]', '_', clean)
+    
+    # Collapse multiple underscores
+    clean = re.sub(r'_+', '_', clean)
+    
+    # Remove leading/trailing underscores
+    clean = clean.strip('_')
+    
+    # If empty after cleaning, use default
+    if not clean:
+        clean = "untitled"
+    
+    return clean
