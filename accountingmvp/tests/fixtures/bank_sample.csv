@@ -1,0 +1,12 @@
+"""Sample bank statement CSV for testing."""
+Date,Reference,Amount,Description
+2024-01-15,TXN001,1500.00,Payment from ABC Corporation
+2024-01-16,TXN002,-250.50,Transfer to XYZ Ltd
+2024-01-17,TXN003,750.00,Invoice INV-2024-001 settlement
+2024-01-18,TXN004,100.00,Refund from Supplier A
+2024-01-19,TXN005,2500.00,Monthly subscription - Client B
+2024-01-20,TXN006,-89.99,Office supplies purchase
+2024-01-21,TXN007,450.00,Consulting fee - Project Alpha
+2024-01-22,TXN008,1200.00,Payment from DEF Industries
+2024-01-23,TXN009,-500.00,Rent payment January
+2024-01-24,TXN010,325.50,Commission earned

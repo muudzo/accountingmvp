@@ -1,0 +1,10 @@
+"""Sample Ecocash export CSV for testing."""
+Date,Reference,Amount,Description
+15/01/2024,EC001,1500,ABC Corp payment received
+16/01/2024,EC002,250,XYZ Limited fee
+17/01/2024,EC003,750,INV-2024-001 paid
+18/01/2024,EC004,100,Supplier refund processed
+19/01/2024,EC005,2500,Client B subscription
+21/01/2024,EC006,450,Alpha project payment
+22/01/2024,EC007,1200,DEF Industries payment
+24/01/2024,EC008,325,Sales commission

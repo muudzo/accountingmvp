@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  reconciliation:
+    build: .
+    container_name: payment-reconciliation
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount for hot-reloading during development
+      - ./src:/app/src:ro
+      - ./dashboard:/app/dashboard:ro
+      # Persistent data directory
+      - ./data:/app/data
+    environment:
+      - APP_ENV=development
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8501/_stcore/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Development service with auto-reload
+  dev:
+    build: .
+    container_name: payment-reconciliation-dev
+    ports:
+      - "8502:8501"
+    volumes:
+      - ./src:/app/src
+      - ./dashboard:/app/dashboard
+      - ./data:/app/data
+    environment:
+      - APP_ENV=development
+      - LOG_LEVEL=DEBUG
+    profiles:
+      - dev
