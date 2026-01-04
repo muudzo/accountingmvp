@@ -1,12 +1,11 @@
 """Pytest configuration and fixtures."""
-import pytest
-import tempfile
-import os
-from decimal import Decimal
-from datetime import date
 
-from src.models.transaction import RawTransaction, NormalizedTransaction
-from src.models.enums import TransactionSource
+from datetime import date
+from decimal import Decimal
+
+import pytest
+
+from src.models.transaction import NormalizedTransaction, RawTransaction
 
 
 @pytest.fixture
@@ -55,7 +54,7 @@ def raw_transaction():
         raw_reference="TXN001",
         description="Payment from ABC Corp",
         source_file="test.csv",
-        line_number=2
+        line_number=2,
     )
 
 
@@ -68,7 +67,7 @@ def normalized_transaction():
         amount=Decimal("1500.00"),
         reference="TXN001",
         description="Payment from ABC Corp",
-        source="bank_statement"
+        source="bank_statement",
     )
 
 
@@ -81,7 +80,7 @@ def matching_normalized_transaction():
         amount=Decimal("1500.00"),
         reference="EC001",
         description="ABC Corporation payment",
-        source="ecocash"
+        source="ecocash",
     )
 
 
@@ -94,5 +93,5 @@ def non_matching_transaction():
         amount=Decimal("9999.99"),
         reference="DIFF001",
         description="Completely different transaction",
-        source="ecocash"
+        source="ecocash",
     )

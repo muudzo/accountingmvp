@@ -1,7 +1,8 @@
 """Models package."""
-from .transaction import RawTransaction, NormalizedTransaction
-from .enums import TransactionType, TransactionSource, MatchStatus, MatchConfidence
-from .match import MatchScore, MatchResult, ReconciliationSummary
+
+from .enums import MatchConfidence, MatchStatus, TransactionSource, TransactionType
+from .match import MatchResult, MatchScore, ReconciliationSummary
+from .transaction import NormalizedTransaction, RawTransaction
 
 __all__ = [
     "RawTransaction",

@@ -1,7 +1,7 @@
 """Parser factory for automatic format detection."""
-from typing import Optional, Type
-from .base import BaseParser
+
 from .bank_csv import BankCSVParser
+from .base import BaseParser
 from .ecocash import EcocashParser
 from .zipit import ZIPITParser
 
@@ -9,25 +9,25 @@ from .zipit import ZIPITParser
 class ParserFactory:
     """
     Factory for creating appropriate parser based on file format.
-    
+
     Uses file extension and content sniffing to detect format.
     """
-    
+
     # Registry of parsers in priority order
-    PARSERS: list[Type[BaseParser]] = [
+    PARSERS: list[type[BaseParser]] = [
         BankCSVParser,
         EcocashParser,
         ZIPITParser,
     ]
-    
+
     @classmethod
-    def get_parser(cls, file_path: str) -> Optional[BaseParser]:
+    def get_parser(cls, file_path: str) -> BaseParser | None:
         """
         Detect file format and return appropriate parser.
-        
+
         Args:
             file_path: Path to the file to parse
-            
+
         Returns:
             Parser instance or None if format not recognized
         """
@@ -39,26 +39,26 @@ class ParserFactory:
                     return parser
             except Exception:
                 continue
-        
+
         return None
-    
+
     @classmethod
-    def get_parser_by_type(cls, parser_type: str) -> Optional[BaseParser]:
+    def get_parser_by_type(cls, parser_type: str) -> BaseParser | None:
         """
         Get parser by explicit type name.
-        
+
         Args:
             parser_type: One of 'bank', 'ecocash', 'zipit'
-            
+
         Returns:
             Parser instance
         """
         type_map = {
-            'bank': BankCSVParser,
-            'ecocash': EcocashParser,
-            'zipit': ZIPITParser,
+            "bank": BankCSVParser,
+            "ecocash": EcocashParser,
+            "zipit": ZIPITParser,
         }
-        
+
         parser_class = type_map.get(parser_type.lower())
         if parser_class:
             return parser_class()
